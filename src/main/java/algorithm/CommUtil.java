@@ -3,6 +3,7 @@ package algorithm;
 /**
  * @author taotao
  */
+
 public class CommUtil {
 
     public static int[] defaultArray = {3, 4, 11, 0, 55, 32, 11, 4, 23};
