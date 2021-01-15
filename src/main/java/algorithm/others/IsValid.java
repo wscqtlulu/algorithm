@@ -44,6 +44,7 @@ package algorithm.others;
 
 import java.util.Stack;
 
+//有效的括号
 //leetcode submit region begin(Prohibit modification and deletion)
 class IsValid {
     public boolean isValid(String s) {

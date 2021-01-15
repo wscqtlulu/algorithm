@@ -23,6 +23,7 @@ package algorithm.others;
 import java.util.ArrayList;
 import java.util.List;
 
+//杨辉三角
 //leetcode submit region begin(Prohibit modification and deletion)
 class Yanghui {
     public List<List<Integer>> generate(int numRows) {

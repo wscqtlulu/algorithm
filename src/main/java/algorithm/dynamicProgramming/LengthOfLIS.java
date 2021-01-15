@@ -50,6 +50,7 @@ package algorithm.dynamicProgramming;
 
 import java.util.Arrays;
 
+//最长递增子序列
 //leetcode submit region begin(Prohibit modification and deletion)
 class LengthOfLIS {
     public int lengthOfLIS(int[] nums) {

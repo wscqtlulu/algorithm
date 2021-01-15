@@ -16,6 +16,7 @@ package algorithm.dynamicProgramming;
 // 👍 2796 👎 0
 
 
+//最大子序和
 //leetcode submit region begin(Prohibit modification and deletion)
 class MaxSubArray {
     public int maxSubArray(int[] nums) {

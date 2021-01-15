@@ -43,6 +43,7 @@ package algorithm.dynamicProgramming;
 // Related Topics 动态规划
 
 
+//最长公共子序列
 //leetcode submit region begin(Prohibit modification and deletion)
 class LongestCommonSubsequence {
     public int longestCommonSubsequence(String text1, String text2) {

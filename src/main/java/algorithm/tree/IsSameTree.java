@@ -38,6 +38,7 @@ package algorithm.tree;
 // Related Topics 树 深度优先搜索
 
 
+//相同的树
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
