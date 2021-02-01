@@ -34,19 +34,34 @@ package algorithm.dynamicProgramming;
 //
 // Related Topics 数组 动态规划
 
-
 //使用最小花费爬楼梯
 //leetcode submit region begin(Prohibit modification and deletion)
 class MinCostClimbingStairs {
-    public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length + 1];
-        dp[0] = 0;
-        dp[1] = 0;
+//    public int minCostClimbingStairs(int[] cost) {
+//        int[] dp = new int[cost.length + 1];
+//        dp[0] = 0;
+//        dp[1] = 0;
+//
+//        for (int i = 2; i < dp.length; i++) {
+//            dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+//        }
+//        return dp[cost.length];
+//    }
 
-        for (int i = 2; i < dp.length; i++) {
-            dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+    public int minCostClimbingStairs(int[] cost) {
+
+        int l = cost.length + 1;
+        int dp0 = 0;
+        int dp1 = 0;
+        int res = 0;
+
+        for (int i = 2; i < l; i++) {
+            res = Math.min(dp1 + cost[i - 1], dp0 + cost[i - 2]);
+            dp0 = dp1;
+            dp1 = res;
         }
-        return dp[cost.length];
+        return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
