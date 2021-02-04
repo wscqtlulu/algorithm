@@ -62,12 +62,14 @@ class IsSymmetric {
         }
         return check(left.left, right.right) && check(left.right, right.left);
     }
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+
 //leetcode submit region end(Prohibit modification and deletion)
 
