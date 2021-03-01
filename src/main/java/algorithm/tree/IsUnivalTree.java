@@ -50,14 +50,18 @@ class IsUnivalTree {
     public boolean isUnivalTree(TreeNode root) {
         if (root != null) {
             res = root.val;
-            return true;
+            return deal(root, res);
         }
         return true;
     }
 
     public boolean deal(TreeNode root, int val){
         if (root != null) {
-            return root.val == val;
+            if (root.val == val) {
+                return deal(root.left, val) && deal(root.right, val);
+            } else {
+                return false;
+            }
         } else {
             return true;
         }
@@ -65,11 +69,11 @@ class IsUnivalTree {
 
     class TreeNode {
         int val;
-        InvertTree.TreeNode left;
-        InvertTree.TreeNode right;
+        TreeNode left;
+        TreeNode right;
         TreeNode() {}
         TreeNode(int val) { this.val = val; }
-        TreeNode(int val, InvertTree.TreeNode left, InvertTree.TreeNode right) {
+        TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
             this.left = left;
             this.right = right;
