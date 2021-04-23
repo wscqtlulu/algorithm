@@ -69,21 +69,32 @@ package algorithm.sort;
  * int guess(int num);
  */
 
-public class GuessNumber extends GuessGame {
+public class GuessNumber{
+    int pick = 3;
     public int guessNumber(int n) {
         int l = 1;
         int r = n;
-        while (l < r) {
-            int min = l + (r - l)/2;
-            if (guess(min) == 0) {
-                return min;
-            } else if (guess(min) == 1) {
-                l = min + 1;
+        while (l <= r) {
+            int mid = l + (r - l)/2;
+            if (guess(mid) == 0) {
+                return mid;
+            } else if (guess(mid) == 1) {
+                l = mid + 1;
             } else {
-                r = min - 1;
+                r = mid - 1;
             }
         }
         return 1;
+    }
+
+    public int guess(int num){
+        if (num == pick) {
+            return 0;
+        } else if (pick < num) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
