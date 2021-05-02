@@ -38,7 +38,7 @@ package algorithm.tree;
 // 👍 143 👎 0
 
 
-//二叉树的第二小的节点
+//二叉树中第二小的节点
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -57,26 +57,29 @@ package algorithm.tree;
  */
 class FindSecondMinimumValue {
     int res = Integer.MAX_VALUE;
+    boolean change = false;
     public int findSecondMinimumValue(TreeNode root) {
         deal(root);
-        return res == Integer.MAX_VALUE ? -1 : res;
+        return change ? res : -1;
     }
 
     public void deal(TreeNode root){
         if (root != null) {
             if (root.left != null) {
                 if (root.left.val < root.right.val) {
+                    change = true;
                     if (res > root.right.val){
                         res = root.right.val;
                     }
                     deal(root.left);
                 } else if (root.left.val > root.right.val){
+                    change = true;
                     if (res > root.left.val){
                         res = root.left.val;
                     }
                     deal(root.right);
                 } else {
-                    if (res != Integer.MAX_VALUE) {
+                    if (res != Integer.MAX_VALUE && res < root.left.val) {
                         res = root.left.val;
                     }
                     deal(root.left);
