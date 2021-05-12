@@ -79,14 +79,18 @@ class CalPoints {
                 stack.pop();
             } else if (ops[i].equals("D")){
                 Integer n = stack.peek();
-                stack.push(n*2);
+                stack.push(n * 2);
             } else if (ops[i].equals("+")){
-                Integer n1 = stack.peek();
-                Integer n2 = stack.peek();
-                stack.push(n1 * n2);
+                Integer n1 = stack.pop();
+                Integer n2 = stack.pop();
+                Integer n3 = n1 + n2;
+                stack.push(n2);
+                stack.push(n1);
+                stack.push(n3);
             } else {
                 stack.push(Integer.valueOf(ops[i]));
             }
+            System.out.println("");
         }
         int res = 0;
         while (!stack.isEmpty()) {
