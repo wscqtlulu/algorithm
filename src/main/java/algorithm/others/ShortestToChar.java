@@ -65,9 +65,15 @@ class ShortestToChar {
                 }
             } else {
                 if (sizeIndex < list.size() - 1) {
-                    res[i] = Math.min(Math.abs(i - list.get(sizeIndex)), Math.abs(i - list.get(sizeIndex + 1)));
                     if (i > list.get(sizeIndex + 1)){
                         sizeIndex++;
+                        if (sizeIndex < list.size() - 1) {
+                            res[i] = Math.min(Math.abs(i - list.get(sizeIndex)), Math.abs(i - list.get(sizeIndex + 1)));
+                        } else {
+                            res[i] = Math.abs(i - list.get(sizeIndex));
+                        }
+                    } else {
+                        res[i] = Math.min(Math.abs(i - list.get(sizeIndex)), Math.abs(i - list.get(sizeIndex + 1)));
                     }
                 } else {
                     res[i] = Math.abs(i - list.get(sizeIndex));
