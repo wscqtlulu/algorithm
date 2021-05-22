@@ -47,31 +47,50 @@ package algorithm.stack;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 //下一个更大元素
 //leetcode submit region begin(Prohibit modification and deletion)
 class NextGreaterElement {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < nums2.length; i++) {
-            list.add(nums2[i]);
-        }
+//        int[] res = new int[nums1.length];
+//        List<Integer> list = new ArrayList<Integer>();
+//        for (int i = 0; i < nums2.length; i++) {
+//            list.add(nums2[i]);
+//        }
+//        for (int i = 0; i < nums1.length; i++) {
+//            int index  = list.indexOf(nums1[i]);
+//            if (index == nums2.length - 1) {
+//                res[i] = -1;
+//            } else {
+//                index++;
+//                while (index <= nums2.length - 1 && nums2[index] <= nums1[i]){
+//                    index++;
+//                }
+//                if (index > nums2.length - 1){
+//                    res[i] = -1;
+//                } else {
+//                    res[i] = nums2[index];
+//                }
+//            }
+//        }
         int[] res = new int[nums1.length];
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(nums2[0]);
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 1; i < nums2.length; i++) {
+            while (!stack.isEmpty() && nums2[i] > stack.peek()) {
+                map.put(stack.pop(), nums2[i]);
+            }
+            stack.push(nums2[i]);
+        }
         for (int i = 0; i < nums1.length; i++) {
-            int index  = list.indexOf(nums1[i]);
-            if (index == nums2.length - 1) {
-                res[i] = -1;
+            if (map.containsKey(nums1[i])){
+                res[i] = map.get(nums1[i]);
             } else {
-                index++;
-                while (index <= nums2.length - 1 && nums2[index] <= nums1[i]){
-                    index++;
-                }
-                if (index > nums2.length - 1){
-                    res[i] = -1;
-                } else {
-                    res[i] = nums2[index];
-                }
+                res[i] = -1;
             }
         }
         return res;
