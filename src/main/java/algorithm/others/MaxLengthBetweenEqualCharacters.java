@@ -57,6 +57,9 @@ class MaxLengthBetweenEqualCharacters {
                     break;
                 }
             }
+            if (s.length() - 1 - i -1 <= res){
+                return res;
+            }
         }
         return res;
     }
