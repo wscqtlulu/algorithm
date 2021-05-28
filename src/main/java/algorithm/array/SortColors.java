@@ -102,7 +102,9 @@ class SortColors {
                         break;
                     }
                 }
-                if (index3 >= index2) {
+                if (index3 > index2) {
+                    return;
+                } else if (index3 == index2 && nums[index3] != 0){
                     return;
                 }
             } else {
