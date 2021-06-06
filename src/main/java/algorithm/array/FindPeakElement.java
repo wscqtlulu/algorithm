@@ -59,6 +59,26 @@ class FindPeakElement {
         }
         return index;
     }
+
+    //二分查找方法
+    public int deal(int l, int r, int[] nums){
+        int left = nums[l];
+        int right = nums[r];
+        int mid = l + (r - l)/2;
+        if (l == mid) {
+            if (nums[l] > nums[r]){
+                return l;
+            } else {
+                return r;
+            }
+        }
+        int midV = nums[mid];
+        if (nums[mid] < nums[mid + 1]) {
+            return deal(mid, r, nums);
+        } else {
+            return deal(l, mid, nums);
+        }
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
