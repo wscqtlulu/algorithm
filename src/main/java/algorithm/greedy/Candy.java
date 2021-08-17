@@ -35,63 +35,88 @@ package algorithm.greedy;
 //分发糖果
 //leetcode submit region begin(Prohibit modification and deletion)
 public class Candy {
-    public int candy(int[] ratings) {
-        if (ratings.length == 0){
-            return 0;
-        }
-        if (ratings.length == 1){
-            return 1;
-        }
+//    public int candy(int[] ratings) {
+//        if (ratings.length == 0){
+//            return 0;
+//        }
+//        if (ratings.length == 1){
+//            return 1;
+//        }
+//
+//        int up = 1;
+//        int down = 1;
+//        int res = 0;
+//        //重复计算的谷底
+//        int sub = 0;
+//        for (int i = 1; i < ratings.length; i++) {
+//            if (ratings[i - 1] == ratings[i]){
+//                res = getRes(down, up, res);
+//                up = 1;
+//                down = 1;
+//                if (i == ratings.length - 1) {
+//                    int max = Math.max(down, up);
+//                    res += max;
+//                    return res - sub;
+//                }
+//            } else if (ratings[i - 1] < ratings[i]){
+//                //到达谷底
+//                if (down > 1) {
+//                    res = getRes(down, up, res);
+//                    up = 1;
+//                    down = 1;
+//                    sub++;
+//                }
+//                up++;
+//                if (i == ratings.length - 1) {
+//                    res = getRes(down, up, res);
+//                    return res - sub;
+//                }
+//            } else if (ratings[i - 1] > ratings[i]){
+//                down++;
+//                if (i == ratings.length - 1) {
+//                    res = getRes(down, up, res);
+//                    return res - sub;
+//                }
+//            }
+//        }
+//        return res - sub;
+//    }
+//    private int getRes(int down, int up, int res){
+//        res += Math.max(down, up);
+//        if ((down - 1) % 2 == 0) {
+//            res += down * (down / 2);
+//        } else {
+//            res += (down - 1) * ((down - 1) / 2) + (down - 1);
+//        }
+//        if ((up - 1) % 2 == 0) {
+//            res += up * (up / 2);
+//        } else {
+//            res += (up - 1) * ((up - 1) / 2) + (up - 1);
+//        }
+//        return res;
+//    }
 
-        int up = 1;
-        int down = 1;
+    //贪婪解法
+    public int candy(int[] ratings) {
+        int l = ratings.length;
+        int[] temp = new int[l];
+        for (int i = 0; i < l; i++) {
+            temp[i] = 1;
+        }
         int res = 0;
-        //重复计算的谷底
-        int sub = 0;
-        for (int i = 1; i < ratings.length; i++) {
-            if (ratings[i - 1] == ratings[i]){
-                res = getRes(down, up, res);
-                up = 1;
-                down = 1;
-                if (i == ratings.length - 1) {
-                    int max = Math.max(down, up);
-                    res += max;
-                    return res - sub;
-                }
-            } else if (ratings[i - 1] < ratings[i]){
-                //到达谷底
-                if (down > 1) {
-                    res = getRes(down, up, res);
-                    up = 1;
-                    down = 1;
-                    sub++;
-                }
-                up++;
-                if (i == ratings.length - 1) {
-                    res = getRes(down, up, res);
-                    return res - sub;
-                }
-            } else if (ratings[i - 1] > ratings[i]){
-                down++;
-                if (i == ratings.length - 1) {
-                    res = getRes(down, up, res);
-                    return res - sub;
-                }
+        for (int i = 1; i < l; i++) {
+            if (ratings[i] > ratings[i - 1]){
+                temp[i] = temp[i - 1] + 1;
             }
         }
-        return res - sub;
-    }
-    private int getRes(int down, int up, int res){
-        res += Math.max(down, up);
-        if ((down - 1) % 2 == 0) {
-            res += down * (down / 2);
-        } else {
-            res += (down - 1) * ((down - 1) / 2) + (down - 1);
-        }
-        if ((up - 1) % 2 == 0) {
-            res += up * (up / 2);
-        } else {
-            res += (up - 1) * ((up - 1) / 2) + (up - 1);
+        res += temp[l - 1];
+        for (int i = l - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]){
+                if (temp[i] <= temp[i + 1]){
+                    temp[i] = temp[i + 1] + 1;
+                }
+            }
+            res += temp[i];
         }
         return res;
     }
