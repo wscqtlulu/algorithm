@@ -1,5 +1,4 @@
 package algorithm.greedy;
-
 //给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。
 //
 // 注意:
@@ -52,27 +51,21 @@ class EraseOverlapIntervals {
         if (intervals.length < 2) {
             return 0;
         }
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[0] != o2[0]) {
-                    return Integer.compare(o1[1], o2[1]);
-                } else {
-                    return Integer.compare(o2[0], o1[0]);
-                }
-            }
+        Arrays.sort(intervals, (a, b)->{
+            return Integer.compare(a[1], b[1]);
         });
-        int count = 0;
+        //不重叠的区间
+        int remove = 1;
         int edge = intervals[0][1];
         for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i][0] < edge){
-                count++;
-            } else {
+            if (intervals[i][0] >= edge){
+                remove++;
                 edge = intervals[i][1];
             }
         }
-        return count;
+        return intervals.length - remove;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
 
