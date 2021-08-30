@@ -76,12 +76,30 @@ class NextGreaterElement {
 //                }
 //            }
 //        }
+//        int[] res = new int[nums1.length];
+//        Stack<Integer> stack = new Stack<Integer>();
+//        stack.push(nums2[0]);
+//        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+//        for (int i = 1; i < nums2.length; i++) {
+//            while (!stack.isEmpty() && nums2[i] > stack.peek()) {
+//                map.put(stack.pop(), nums2[i]);
+//            }
+//            stack.push(nums2[i]);
+//        }
+//        for (int i = 0; i < nums1.length; i++) {
+//            if (map.containsKey(nums1[i])){
+//                res[i] = map.get(nums1[i]);
+//            } else {
+//                res[i] = -1;
+//            }
+//        }
+//        return res;
+
         int[] res = new int[nums1.length];
-        Stack<Integer> stack = new Stack<Integer>();
-        stack.push(nums2[0]);
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 1; i < nums2.length; i++) {
-            while (!stack.isEmpty() && nums2[i] > stack.peek()) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < nums2.length; i++) {
+            while (!stack.isEmpty() && nums2[i] > stack.peek()){
                 map.put(stack.pop(), nums2[i]);
             }
             stack.push(nums2[i]);
