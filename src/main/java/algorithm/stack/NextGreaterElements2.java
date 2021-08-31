@@ -1,5 +1,8 @@
 package algorithm.stack;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 public class NextGreaterElements2 {
     public int[] nextGreaterElements(int[] nums) {
         if (nums == null || nums.length <= 1) {
