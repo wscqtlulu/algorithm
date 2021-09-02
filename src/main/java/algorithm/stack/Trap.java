@@ -38,20 +38,42 @@ package algorithm.stack;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Trap {
     public int trap(int[] height) {
+//        int res = 0;
+//        for (int i = 0; i < height.length; i++) {
+//            if (i == 0 || i == height.length - 1) {
+//                continue;
+//            }
+//            int rH = height[i];
+//            for (int j = i + 1; j < height.length; j++) {
+//                rH = Math.max(rH, height[j]);
+//            }
+//            int lH = height[i];
+//            for (int j = i - 1; j >= 0; j--) {
+//                lH = Math.max(lH, height[j]);
+//            }
+//            int h = Math.min(lH, rH) - height[i];
+//            if (h < 0) {
+//                h = 0;
+//            }
+//            res += h;
+//        }
+//        return res;
         int res = 0;
+        int[] rH = new int[height.length];
+        rH[height.length - 1] = height[height.length - 1];
+        for (int j = height.length - 2; j > 0; j--) {
+            rH[j] = Math.max(rH[j + 1], height[j]);
+        }
+        int[] lH = new int[height.length];
+        lH[0] = height[0];
+        for (int j = 1; j < height.length; j++) {
+            lH[j] = Math.max(lH[j - 1], height[j]);
+        }
         for (int i = 0; i < height.length; i++) {
             if (i == 0 || i == height.length - 1) {
                 continue;
             }
-            int rH = height[i];
-            for (int j = i + 1; j < height.length; j++) {
-                rH = Math.max(rH, height[j]);
-            }
-            int lH = height[i];
-            for (int j = i - 1; j >= 0; j--) {
-                lH = Math.max(lH, height[j]);
-            }
-            int h = Math.min(lH, rH) - height[i];
+            int h = Math.min(lH[i], rH[i]) - height[i];
             if (h < 0) {
                 h = 0;
             }
