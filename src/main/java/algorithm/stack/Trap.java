@@ -34,6 +34,8 @@ package algorithm.stack;
 // 👍 2637 👎 0
 
 
+import java.util.Stack;
+
 //接雨水
 //leetcode submit region begin(Prohibit modification and deletion)
 class Trap {
@@ -58,26 +60,54 @@ class Trap {
 //            res += h;
 //        }
 //        return res;
+
+//        int res = 0;
+//        int[] rH = new int[height.length];
+//        rH[height.length - 1] = height[height.length - 1];
+//        for (int j = height.length - 2; j > 0; j--) {
+//            rH[j] = Math.max(rH[j + 1], height[j]);
+//        }
+//        int[] lH = new int[height.length];
+//        lH[0] = height[0];
+//        for (int j = 1; j < height.length; j++) {
+//            lH[j] = Math.max(lH[j - 1], height[j]);
+//        }
+//        for (int i = 0; i < height.length; i++) {
+//            if (i == 0 || i == height.length - 1) {
+//                continue;
+//            }
+//            int h = Math.min(lH[i], rH[i]) - height[i];
+//            if (h < 0) {
+//                h = 0;
+//            }
+//            res += h;
+//        }
+//        return res;
+
+        //单调栈解法
+        Stack<Integer> stack = new Stack<>();
         int res = 0;
-        int[] rH = new int[height.length];
-        rH[height.length - 1] = height[height.length - 1];
-        for (int j = height.length - 2; j > 0; j--) {
-            rH[j] = Math.max(rH[j + 1], height[j]);
-        }
-        int[] lH = new int[height.length];
-        lH[0] = height[0];
-        for (int j = 1; j < height.length; j++) {
-            lH[j] = Math.max(lH[j - 1], height[j]);
-        }
         for (int i = 0; i < height.length; i++) {
-            if (i == 0 || i == height.length - 1) {
-                continue;
+            if (stack.isEmpty()) {
+                stack.push(i);
+            } else {
+                if (height[i] < height[stack.peek()]){
+                    stack.push(i);
+                } else if (height[i] == height[stack.peek()]){
+                    stack.pop();
+                    stack.push(i);
+                } else {
+                    while (!stack.isEmpty() && height[i] > height[stack.peek()]){
+                        int mid = stack.pop();
+                        if (!stack.isEmpty()) {
+                            int h = Math.min(height[i], height[stack.peek()]) - height[mid];
+                            int w = i - stack.peek() - 1;
+                            res += h * w;
+                        }
+                    }
+                    stack.push(i);
+                }
             }
-            int h = Math.min(lH[i], rH[i]) - height[i];
-            if (h < 0) {
-                h = 0;
-            }
-            res += h;
         }
         return res;
     }
